@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Homework 5.2.1</string>
+    <string name="invalid_username">The username is invalid. It should be 4–48 characters long and it can\'t contain whitespace characters.</string>
+    <string name="invalid_password">The password is invalid. It should be 4–64 characters long and it shouldn\'t be a simple sequence like 1234.</string>
+    <string name="empty_username">Please type a username</string>
+    <string name="empty_password">Please type a password</string>
+    <string name="login_fail">Failed to log in</string>
+    <string name="username_taken">This username is already taken by someone</string>
+    <string name="account_title">"This is your account. You can store some text"
+        "here. It will only be accessible to you and to no one else."</string>
+    <string name="account_username_info">Your username: %s</string>
+    <string name="text_editor_hint">The text you type here will be saved in your account and restored when you log out and in again</string>
+    <string name="log_out">Log Out</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up">Sign Up</string>
+</resources>

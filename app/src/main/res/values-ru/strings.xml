@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Homework 5.2.1</string>
+    <string name="invalid_username">Имя пользователя некорректно. Его длина должна быть 4–48 символов и оно не должно содержать пробелы.</string>
+    <string name="invalid_password">Пароль некорректкен. Его длина должна составлять 4–64 символа и он не должен содержать пробелы.</string>
+    <string name="empty_username">Введите имя пользователя</string>
+    <string name="empty_password">Введите пароль</string>
+    <string name="login_fail">Не удалось войти</string>
+    <string name="username_taken">Выбранное имя пользователя уже занято</string>
+    <string name="account_title">Добро пожаловать в ваш аккаунт. Вы можете хранить здесь текст. Он будет доступен только вам и больше никому.</string>
+    <string name="account_username_info">Ваше имя пользователя: %s</string>
+    <string name="text_editor_hint">Текст, введённый здесь будет сохранён и восстановлен когда вы заново войдёте в аккаунт</string>
+    <string name="log_out">Выйти</string>
+    <string name="username">Имя пользователя</string>
+    <string name="password">Пароль</string>
+    <string name="log_in">Войти</string>
+    <string name="sign_up">Зарегистрироваться</string>
+</resources>
