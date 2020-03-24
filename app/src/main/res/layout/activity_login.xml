@@ -58,4 +58,15 @@
         app:layout_constraintStart_toEndOf="@+id/logInButton"
         app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
 
+    <CheckBox
+        android:id="@+id/useExternalStorageCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/use_external_storage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logInButton"
+        app:layout_constraintVertical_bias="0.25" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

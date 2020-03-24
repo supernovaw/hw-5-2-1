@@ -15,4 +15,5 @@
     <string name="password">Пароль</string>
     <string name="log_in">Войти</string>
     <string name="sign_up">Зарегистрироваться</string>
+    <string name="use_external_storage">Использовать внешнее хранилище</string>
 </resources>

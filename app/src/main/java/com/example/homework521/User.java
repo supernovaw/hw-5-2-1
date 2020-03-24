@@ -1,6 +1,7 @@
 package com.example.homework521;
 
 import android.content.Context;
+import android.os.Environment;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
@@ -23,6 +24,7 @@ public class User {
 
 	// 'file' being null indicates not yet initialized
 	private static File file;
+	private static boolean usesExternalStorage;
 	private static List<User> users;
 	// 'currentUser' being null indicates not logged in
 	private static User currentUser;
@@ -175,9 +177,15 @@ public class User {
 		bufferOut.close();
 	}
 
-	public static void initIfNecessary(Context c) {
-		if (file == null) {
-			file = new File(c.getFilesDir(), FILENAME);
+	public static void initIfNecessary(Context c, boolean usesExternalStorage) {
+		if (file == null || usesExternalStorage != User.usesExternalStorage) {
+			User.usesExternalStorage = usesExternalStorage;
+			if (usesExternalStorage) {
+				file = new File(c.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), FILENAME);
+			} else {
+				file = new File(c.getFilesDir(), FILENAME);
+			}
+			Log.v(LOG_TAG, "Set file to " + file.getAbsolutePath());
 			load();
 		}
 	}
