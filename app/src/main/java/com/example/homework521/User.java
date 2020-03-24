@@ -11,7 +11,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class User {
@@ -25,11 +28,16 @@ public class User {
 	private static User currentUser;
 
 	private String username;
-	private String password;
+	private byte[] passwordSHA256;
 
 	private User(String username, String password) {
 		this.username = username;
-		this.password = password;
+		passwordSHA256 = sha256(password);
+	}
+
+	private User(String username, byte[] passwordSHA256) {
+		this.username = username;
+		this.passwordSHA256 = passwordSHA256;
 	}
 
 	public String getName() {
@@ -60,7 +68,7 @@ public class User {
 	public static boolean attemptLogin(String username, String password) {
 		for (User u : users) {
 			if (u.username.equals(username)) {
-				boolean passwordCorrect = password.equals(u.password);
+				boolean passwordCorrect = Arrays.equals(u.passwordSHA256, sha256(password));
 				if (passwordCorrect) {
 					currentUser = u; // switch user
 					return true;
@@ -127,12 +135,11 @@ public class User {
 		for (int i = 0; i < usersAmt; i++) {
 			byte[] name = new byte[buffer.getInt()];
 			buffer.get(name);
-			byte[] pass = new byte[buffer.getInt()];
-			buffer.get(pass);
+			byte[] passSHA256 = new byte[buffer.getInt()];
+			buffer.get(passSHA256);
 
 			String nameString = new String(name, StandardCharsets.UTF_8);
-			String passString = new String(pass, StandardCharsets.UTF_8);
-			users.add(new User(nameString, passString));
+			users.add(new User(nameString, passSHA256));
 		}
 	}
 
@@ -155,7 +162,7 @@ public class User {
 		// write each user
 		for (User u : users) {
 			byte[] name = u.username.getBytes(StandardCharsets.UTF_8);
-			byte[] pass = u.password.getBytes(StandardCharsets.UTF_8);
+			byte[] pass = u.passwordSHA256;
 
 			bufferOut.write(intBuffer.putInt(0, name.length).array(), 0, 4);
 			bufferOut.write(name, 0, name.length);
@@ -177,5 +184,15 @@ public class User {
 
 	private static void sync() {
 		new Thread(User::save).start();
+	}
+
+	private static byte[] sha256(String password) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			return md.digest(password.getBytes(StandardCharsets.UTF_8));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
